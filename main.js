@@ -22,6 +22,22 @@ function createWindow () {
     }
   })
 
+  let progress = 0.01
+
+  let progressInterval = setInterval(() => {
+    mainWindow.setProgressBar(progress)
+    progress += 0.01
+    if (progress <= 1){
+      progress += 0.01
+    } else {
+      mainWindow.setProgressBar(-1)
+      clearInterval(progressInterval)
+    }
+      
+  }, 100);
+
+  mainWindow.setProgressBar(progress)
+
   // Load index.html into the new BrowserWindow
   mainWindow.loadFile('index.html')
 
