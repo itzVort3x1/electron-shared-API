@@ -17,7 +17,9 @@
 
     <br><button type="button" onclick="process.hang()">Hang Renderer</button>
     <br><button type="button" onclick="process.crash()">Crash Renderer</button>
-
+    <br><button type="button" onclick="showSite()">Launch Electron.js site</button>
+    <br><button type="button" onclick="showSplashFile()">Show in Finder</button>
+    <br><button type="button" onclick="deleteSplashFile()">Delete Splash.png</button>
     <script>
 
       // let i = 1
@@ -25,6 +27,26 @@
       //   console.log(i)
       //   i++
       // }, 500)
+
+      const { shell } = require('electron')
+
+      const showSite = () => {
+        shell.openExternal('https://electronjs.org')
+      }
+
+      const splashPath = `${__dirname}/splash.png`
+
+      const openSplash = () => {
+        shell.openPath(splashPath)
+      }
+
+      const showSplashFile = () => {
+        shell.showItemInFolder(splashPath)
+      }
+
+      const deleteSplashFile = () => {
+        shell.moveItemToTrash(splashPath)
+      }
 
     </script>
   </body>
