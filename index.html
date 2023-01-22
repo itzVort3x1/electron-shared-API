@@ -43,7 +43,7 @@
       const { shell, nativeImage, ipcRenderer, clipboard } = require('electron')
 
       console.log(clipboard.readText());
-
+      
       const makeUpper = e => {
 
         let cbText = clipboard.readText();
@@ -99,6 +99,14 @@
 
       window.addEventListener('online', e => setStatus(true))
       window.addEventListener('offline', e => setStatus(false))
+
+      let notification = new Notification('Electron App', {
+        body: 'Hello from the main process'
+      })
+
+      notification.onclick = e => {
+        console.log(e);
+      }
 
     </script>
   </body>
