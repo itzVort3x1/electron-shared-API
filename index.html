@@ -21,6 +21,8 @@
     <br><button type="button" onclick="showSplashFile()">Show in Finder</button>
     <br><button type="button" onclick="deleteSplashFile()">Delete Splash.png</button>
 
+    <br><button type="button" onclick="makeUpper()">Make Clipboard uppercase</button>
+
     <br>
 
     <button onclick="toPng()">PNG</button>
@@ -33,7 +35,17 @@
       //   i++
       // }, 500)
 
-      const { shell, nativeImage, ipcRenderer } = require('electron')
+      const { shell, nativeImage, ipcRenderer, clipboard } = require('electron')
+
+      console.log(clipboard.readText());
+
+      const makeUpper = e => {
+
+        let cbText = clipboard.readText();
+
+        clipboard.writeText(cbText.toUpperCase());
+      }
+
       const fs = require('fs')
 
       const showSite = () => {
