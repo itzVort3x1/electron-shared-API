@@ -20,6 +20,11 @@
     <br><button type="button" onclick="showSite()">Launch Electron.js site</button>
     <br><button type="button" onclick="showSplashFile()">Show in Finder</button>
     <br><button type="button" onclick="deleteSplashFile()">Delete Splash.png</button>
+
+    <br>
+
+    <button onclick="toPng()">PNG</button>
+    <button onclick="toJpg()">JPG`</button>
     <script>
 
       // let i = 1
@@ -28,7 +33,8 @@
       //   i++
       // }, 500)
 
-      const { shell } = require('electron')
+      const { shell, nativeImage, ipcRenderer } = require('electron')
+      const fs = require('fs')
 
       const showSite = () => {
         shell.openExternal('https://electronjs.org')
@@ -46,6 +52,24 @@
 
       const deleteSplashFile = () => {
         shell.moveItemToTrash(splashPath)
+      }
+
+      const splash = nativeImage.createFromPath(splashPath)
+      console.log(splash.getSize())
+
+      const saveToDesktop = async (image, ext) => {
+        const desktopPath = await ipcRenderer.invoke('app-path')
+        fs.writeFile(`${desktopPath}/spalsh.${ext}`, image, console.log)
+      }
+
+      const toPng = e => {
+        let pngSplash = splash.toPNG();
+        saveToDesktop(pngSplash, 'png');
+      }
+
+      const toJpg = e => {
+        let jpgSplash = splash.toJPEG(100);
+        saveToDesktop(jpgSplash, 'jpg');
       }
 
     </script>
