@@ -27,6 +27,11 @@
 
     <button onclick="toPng()">PNG</button>
     <button onclick="toJpg()">JPG`</button>
+
+    <br>
+
+    <h1>App is: <u id="status"></u></h1>
+
     <script>
 
       // let i = 1
@@ -83,6 +88,17 @@
         let jpgSplash = splash.toJPEG(100);
         saveToDesktop(jpgSplash, 'jpg');
       }
+
+      const setStatus = status => {
+        const statusNode = document.getElementById('status')
+
+        statusNode.innerText = status ? 'Online' : 'Offline'
+      }
+
+      setStatus(navigator.onLine)
+
+      window.addEventListener('online', e => setStatus(true))
+      window.addEventListener('offline', e => setStatus(false))
 
     </script>
   </body>

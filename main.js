@@ -1,6 +1,5 @@
 // Modules
-const {app, BrowserWindow, ipcMain} = require('electron')
-
+const {app, BrowserWindow, ipcMain} = require('electron');
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
@@ -25,6 +24,19 @@ function createWindow () {
 
   // Load index.html into the new BrowserWindow
   mainWindow.loadFile('index.html')
+
+  // let i = 1;
+  // mainWindow.webContents.on('paint', (e, dirty, image) => {
+  //   let screenshot = image.toPNG();
+  //   fstat.writeFile(app.getPath('desktop') + `/screenshot_${i}.png`, screenshot, console.log)
+  //   i++;
+  // })
+
+  // mainWindow.webContents.on('did-finish-load', () => {
+  //   console.log(mainWindow.getTitle());
+  //   mainWindow.close();
+  //   mainWindow = null;
+  // })
 
   // Open DevTools - Remove for PRODUCTION!
   mainWindow.webContents.openDevTools();
